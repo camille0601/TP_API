@@ -19,5 +19,5 @@ jobs:
           script: |
             cd /home/tp-api
 
-            
+
             git pull origin main || git clone https://github.com/camille0601/TP_API.git .
