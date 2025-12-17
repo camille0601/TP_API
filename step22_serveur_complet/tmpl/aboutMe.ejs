@@ -1,23 +1,18 @@
 <!DOCTYPE html>
 <html>
-
-<head>
+  <head>
     <title>A PROPOS</title>
     <%- include("layout/head") %>
-        <meta name="description" content="mon site">
-</head>
+    <meta name="description" content="mon site" />
+  </head>
 
-<body>
+  <body>
     <h1>Avec des templates inclus</h1>
-    <%- include("layout/menu") %>
-        <%- include("layout/header") %>
+    <%- include("layout/menu") %> <%- include("layout/header") %>
 
-            <main>
-                <p>Je m'appelle camille</p>
-            </main>
-            <%- include("layout/footer") %>
-
-
-</body>
-
+    <main>
+      <p>Je m'appelle camille</p>
+    </main>
+    <%- include("layout/footer") %>
+  </body>
 </html>
