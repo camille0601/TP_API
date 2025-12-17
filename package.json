@@ -1,0 +1,20 @@
+{
+  "name": "exo2",
+  "version": "1.0.0",
+  "description": "bla bla bla",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node serveur.js",
+    "dev": "nodemon serveur.js"
+  },
+  "keywords": [
+    "bgfez"
+  ],
+  "author": "moi",
+  "license": "ISC",
+  "dependencies": {
+    "ejs": "^3.1.10"
+  }
+}

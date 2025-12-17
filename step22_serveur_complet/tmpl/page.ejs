@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>
+        <%= header.title %>
+    </title>
+    <meta charset="UTF-8">
+    <meta name="description" content="mon site">
+    <meta name="keywords" content="Moi, camille, choplain ">
+    <meta name="author" content="Camille Choplain">
+
+<body <%- isAdmin ? "style='background-color:red;'" :"" %> >
+    <h1>Avec de la data injectée</h1>
+    <nav>
+        <ul>
+            <li><a href="/home">HOME</a></li>
+            <li><a href="/aboutMe">aPropos</a></li>
+            <li><a href="/maPhoto">ma photo</a></li>
+        </ul>
+    </nav>
+    <header><%- body.header %></header>
+    <main><%- body.main %></main>
+    <footer><%- body.footer %></footer>
+</body>
+
+</html>
