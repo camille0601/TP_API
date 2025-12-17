@@ -10,6 +10,10 @@ import url from "node:url"
 import fs from 'node:fs';
 import { dirname } from "node:path";
 import ejs from 'ejs';
+import path from "path";
+
+
+app.use(express.static(path.join(__dirname, 'tmpl')));
 
 const SERVER_PORT = 8080;
 
@@ -64,7 +68,7 @@ server.on('request', function (request, response) {
                 }
             }
             // Asynchrone
-            ejs.renderFile(template_folder + '\\page.ejs', templateData, {}, (err, str) => {
+            ejs.renderFile(path.join(template_folder, 'page.ejs'), templateData, {}, (err, str) => {
                 if (err) {
                     console.error(err);
                     return
@@ -74,20 +78,20 @@ server.on('request', function (request, response) {
             break;
         case '/aboutMe':
             // sans test d'erreur
-            ejs.renderFile(template_folder + '/aboutMe.ejs', { title: 'about Me !' }, (err, str) => {
+            ejs.renderFile(path.join(template_folder, 'aboutMe.ejs'), { title: 'about Me !' }, (err, str) => {
                 response.end(str);
             });
             break;
         case '/bugUtf8':
             // Synchrone condensé
-            response.end(fs.readFileSync(template_folder + '/bugUtf8.html'));
+            response.end(fs.readFileSync(path.join(template_folder, 'bugUtf8.html')));
             break;
         case '/test.php':
             response.end(`Est-ce bien une page PHP 🤔 ?`);
             break;
 
         default: {
-            fs.readFile(template_folder + '/NotFound.ejs', function (err, content) {
+            fs.readFile(path.join(template_folder, 'NotFound.ejs'), function (err, content) {
                 response.statusCode = 404;
                 response.end(content);
             })
