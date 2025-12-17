@@ -10,14 +10,24 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Deploy
+      - name: Deploy to VPS
         uses: appleboy/ssh-action@v1.0.0
         with:
           host: 31.207.34.100
           username: root
           key: ${{ secrets.SSH_KEY }}
           script: |
-            cd /home/tp-api
+            set -e
 
+            cd /home
 
-            git pull origin main || git clone https://github.com/camille0601/TP_API.git .
+            if [ ! -d "tp-api/.git" ]; then
+              echo "📦 Cloning repository"
+              rm -rf tp-api
+              git clone https://github.com/camille0601/TP_API.git tp-api
+            else
+              echo "🔄 Pulling latest changes"
+              cd tp-api
+              git remote set-url origin https://github.com/camille0601/TP_API.git
+              git pull origin main
+            fi
