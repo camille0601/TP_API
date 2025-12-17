@@ -10,7 +10,7 @@ import url from "node:url"
 import fs from 'node:fs';
 import { dirname } from "node:path";
 import ejs from 'ejs';
-import path from "path";
+import path from "node:path";
 
 
 app.use(express.static(path.join(__dirname, 'tmpl')));
@@ -29,7 +29,7 @@ server.on('listening', function () {
 //récupération du répertoire de template
 const __filename = url.fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
-const template_folder = __dirname + '\\tmpl';
+const template_folder = path.join(__dirname, 'tmpl');
 
 //gestion des pages
 server.on('request', function (request, response) {
