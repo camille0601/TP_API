@@ -20,6 +20,7 @@ jobs:
             set -e
 
             cd /home
+            
 
             if [ ! -d "tp-api/.git" ]; then
               echo "📦 Cloning repository"
