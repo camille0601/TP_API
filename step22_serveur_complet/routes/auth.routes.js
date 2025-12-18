@@ -40,9 +40,8 @@ router.get(["/", "/home"], (req, res) => {
 
 
 // chat page
-router.get("/chat", (req, res) => {
+app.get("/chat", requireAdmin, (req, res) => {
   res.render("chat", {
-    pseudo: req.session.pseudo ?? "",
   });
 });
 
