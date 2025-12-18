@@ -8,11 +8,14 @@
 
   <body>
     <h1>Avec des templates inclus</h1>
-    <%- include("layout/menu") %> <%- include("layout/header") %>
+
+    <%- include("layout/menu") %>
+    <%- include("layout/header", { title: "À propos de moi" }) %>
 
     <main>
-      <p>Je m'appelle camille</p>
+      <p>Je m'appelle Camille</p>
     </main>
+
     <%- include("layout/footer") %>
   </body>
 </html>

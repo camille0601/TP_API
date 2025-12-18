@@ -4,11 +4,17 @@ import fs from "node:fs";
 import path from "node:path";
 import ejs from "ejs";
 import { dirname } from "node:path";
+import express from "express";
+import session from "express-session";
+
+import authRoutes from "./routes/auth.routes.js";
+import requireAdmin from "./middlware/requireAdmin.js";
 
 // ------------------------
 // Constantes
 // ------------------------
 const SERVER_PORT = 8080;
+const app = express();
 
 // ------------------------
 // __dirname en ES module
@@ -17,9 +23,60 @@ const __filename = url.fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 const template_folder = path.join(__dirname, "tmpl");
 
+
+// ------------------------
+// Middleware
+// ------------------------
+app.use(express.urlencoded({ extended: true })); // pour récupérer les forms
+
+// sessions
+app.use(
+  session({
+    secret: "tp-secret-simple",
+    resave: false,
+    saveUninitialized: false,
+  })
+);
+
+// view = tpml
+app.set("view engine", "ejs");
+app.set("views", path.join(__dirname, "tmpl"));
+
+// routes auth
+app.use(authRoutes);
+
+// routes existantes
+app.get("/aboutMe", requireAdmin, (req, res) => {
+  res.render("aboutMe");
+});
+
+app.get(["/", "/home"], requireAdmin, (req, res) => {
+  res.render("home", {
+    isAdmin: req.session.isAdmin,
+    header: {
+      title: "HOME",
+    },
+    body: {
+      header: "<h1>Bienvenue 👋</h1>",
+      main: "<p>Connexion réussie.</p>",
+    },
+  });
+});
+
+// 404
+app.use((req, res) => {
+  res.status(404).render("notFound");
+});
+
+// Lancement
+app.listen(SERVER_PORT, "0.0.0.0", () => {
+  console.log(`🚀 Serveur démarré sur http://0.0.0.0:${SERVER_PORT}`);
+});
+
 // ------------------------
 // Création du serveur
 // ------------------------
+/*
 const server = http.createServer((request, response) => {
   const pageUrl = url.parse(request.url, true);
   console.log(`URL demandée : ${request.method} ${request.url}`);
@@ -86,10 +143,13 @@ const server = http.createServer((request, response) => {
       response.end("Page non trouvée");
   }
 });
+*/
 
 // ------------------------
 // Lancement serveur (IMPORTANT)
 // ------------------------
+
+/*
 server.listen(SERVER_PORT, "0.0.0.0", () => {
   console.log(
     `🚀 Serveur démarré sur http://0.0.0.0:${SERVER_PORT}`
@@ -97,6 +157,7 @@ server.listen(SERVER_PORT, "0.0.0.0", () => {
 });
 
 console.log("thread principal terminé");
+*/
 
 // ------------------------
 // Cookies

@@ -11,13 +11,13 @@
     <meta name="author" content="Camille Choplain">
 
     
-<body <%- isAdmin ? "style='background-color:red;'" :"" %> >
-    <h1>Avec de la data injectée</h1>
+<body <%- isAdmin %> >
     <nav>
         <ul>
             <li><a href="/home">HOME</a></li>
             <li><a href="/aboutMe">aPropos</a></li>
             <li><a href="/maPhoto">ma photo</a></li>
+            <li><a href="/login">déconnexion</a></li>
         </ul>
     </nav>
     <header><%- body.header %></header>
