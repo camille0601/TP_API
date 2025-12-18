@@ -2,6 +2,17 @@ import { Server } from "socket.io";
 
 const messages = [];
 
+// Fonction pour nettoyer les bad words
+function cleanBadWords(text) {
+  const badWords = ['merde', 'putain', 'con', 'salope', 'encule']; // Liste de mots à censurer
+  let cleanedText = text;
+  badWords.forEach(word => {
+    const regex = new RegExp(word, 'gi');
+    cleanedText = cleanedText.replace(regex, '*'.repeat(word.length));
+  });
+  return cleanedText;
+}
+
 export function initChat(server) {
   const io = new Server(server);
 
@@ -10,9 +21,11 @@ export function initChat(server) {
     socket.emit("history", messages);
 
     socket.on("message", ({ pseudo, text }) => {
+      // Nettoyer le message
+      const cleanedText = cleanBadWords(text);
       const msg = {
         pseudo,
-        text,
+        text: cleanedText,
         date: new Date().toLocaleTimeString(),
       };
 

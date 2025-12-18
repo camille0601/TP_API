@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>
+        <%= header.title %>
+    </title>
+    <meta charset="UTF-8">
+    <meta name="description" content="mon site">
+    <meta name="keywords" content="Moi, camille, choplain ">
+    <meta name="author" content="Camille Choplain">
+    <link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+    <header>
+        <h1><%= header.title %></h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="/aboutMe">aPropos</a></li>
+            <li><a href="/chat">chat</a></li>
+            <li><a href="/login">déconnexion</a></li>
+        </ul>
+    </nav>
+    <main>
+        <%- body.header %>
+        <%- body.main %>
+    </main>
+    <footer>
+        Made by Camille le <%= new Date().toLocaleDateString() %>
+    </footer>
+</body>
+
+</html>
