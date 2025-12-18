@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "main": "app.js",
   "scripts": {
-    "start": "nodemon app.js",
+    "start": "node start.js",
+    "dev": "node start.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "type": "module",

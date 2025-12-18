@@ -38,9 +38,9 @@ app.use(
   })
 );
 
-// view = tpml
+// view = views
 app.set("view engine", "ejs");
-app.set("views", path.join(__dirname, "tmpl"));
+app.set("views", path.join(__dirname, "views"));
 app.use(express.static("public"));
 
 // routes auth

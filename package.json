@@ -7,7 +7,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node serveur.js",
-    "dev": "nodemon serveur.js"
+    "dev": "nodemon serveur.js",
+    "start:step22": "npm start --prefix step22_serveur_complet",
+    "dev:step22": "npm run dev --prefix step22_serveur_complet"
   },
   "keywords": [
     "bgfez"
