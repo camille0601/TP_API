@@ -9,7 +9,7 @@ import express from "express";
 import session from "express-session";
 
 import authRoutes from "./routes/auth.routes.js";
-import requireAdmin from "./middlware/requireAdmin.js";
+import requireAdmin from "./middlewares/requireAdmin.js";
 
 // ------------------------
 // Constantes
