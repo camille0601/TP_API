@@ -1,4 +1,5 @@
-import http from "node:http";
+import http from "http";
+import { initChat } from "./chat/chat.server.js";
 import url from "node:url";
 import fs from "node:fs";
 import path from "node:path";
@@ -23,7 +24,6 @@ const __filename = url.fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 const template_folder = path.join(__dirname, "tmpl");
 
-
 // ------------------------
 // Middleware
 // ------------------------
@@ -41,6 +41,7 @@ app.use(
 // view = tpml
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "tmpl"));
+app.use(express.static("public"));
 
 // routes auth
 app.use(authRoutes);
@@ -63,100 +64,29 @@ app.get(["/", "/home"], requireAdmin, (req, res) => {
   });
 });
 
+app.get("/chat", requireAdmin, (req, res) => {
+  res.render("chat", {
+  });
+});
+
+
 // 404
 app.use((req, res) => {
   res.status(404).render("notFound");
 });
 
+const server = http.createServer(app);
+initChat(server);
+
+server.listen(SERVER_PORT, "0.0.0.0", () => {
+  console.log(`🚀 Serveur + WS sur http://0.0.0.0:${SERVER_PORT}`);
+});
+
 // Lancement
+/*
 app.listen(SERVER_PORT, "0.0.0.0", () => {
   console.log(`🚀 Serveur démarré sur http://0.0.0.0:${SERVER_PORT}`);
 });
-
-// ------------------------
-// Création du serveur
-// ------------------------
-/*
-const server = http.createServer((request, response) => {
-  const pageUrl = url.parse(request.url, true);
-  console.log(`URL demandée : ${request.method} ${request.url}`);
-
-  response.setHeader("Content-Type", "text/html; charset=UTF-8");
-
-  let isAdmin = null;
-  if (pageUrl.query.isAdmin !== undefined) {
-    response.setHeader("Set-Cookie", "isAdmin=" + pageUrl.query.isAdmin);
-    isAdmin = pageUrl.query.isAdmin === "true";
-  }
-
-  const parsedCookie = parseCookies(request);
-  isAdmin = isAdmin ?? parsedCookie.isAdmin;
-
-  switch (pageUrl.pathname) {
-    case "/":
-    case "/home": {
-      const templateData = {
-        isAdmin,
-        header: { title: "HOME" },
-        body: {
-          header: "<h1>Bienvenue !</h1>",
-          main: "<p>Ceci est mon site fait avec EJS.</p>",
-        },
-      };
-
-      ejs.renderFile(
-        path.join(template_folder, "page.ejs"),
-        templateData,
-        {},
-        (err, str) => {
-          if (err) {
-            console.error(err);
-            response.statusCode = 500;
-            return response.end("Erreur serveur");
-          }
-          response.end(str);
-        }
-      );
-      break;
-    }
-
-    case "/aboutMe":
-      ejs.renderFile(
-        path.join(template_folder, "aboutMe.ejs"),
-        {},
-        (err, str) => response.end(str)
-      );
-      break;
-
-    case "/bugUtf8":
-      response.end(
-        fs.readFileSync(path.join(template_folder, "bugUtf8.html"))
-      );
-      break;
-
-    case "/test.php":
-      response.end("Est-ce bien une page PHP 🤔 ?");
-      break;
-
-    default:
-      response.statusCode = 404;
-      response.end("Page non trouvée");
-  }
-});
-*/
-
-// ------------------------
-// Lancement serveur (IMPORTANT)
-// ------------------------
-
-/*
-server.listen(SERVER_PORT, "0.0.0.0", () => {
-  console.log(
-    `🚀 Serveur démarré sur http://0.0.0.0:${SERVER_PORT}`
-  );
-});
-
-console.log("thread principal terminé");
 */
 
 // ------------------------

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Chat</title>
+  <link rel="stylesheet" href="/chat.css">
+</head>
+<body>
+
+<h1>💬 Chat Socket.io</h1>
+
+<div id="login">
+  <input id="pseudo" placeholder="Ton pseudo">
+  <button onclick="join()">Entrer</button>
+</div>
+
+<div id="chat" style="display:none">
+  <div id="messages"></div>
+  <input id="msg" placeholder="Message">
+  <button onclick="send()">Envoyer</button>
+</div>
+
+<!-- IMPORTANT -->
+<script src="/socket.io/socket.io.js"></script>
+<script src="/chat.js"></script>
+</body>
+</html>
