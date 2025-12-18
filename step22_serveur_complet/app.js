@@ -65,8 +65,7 @@ app.get(["/", "/home"], requireAdmin, (req, res) => {
 });
 
 app.get("/chat", requireAdmin, (req, res) => {
-  res.render("chat", {
-  });
+  res.render("chat");
 });
 
 
