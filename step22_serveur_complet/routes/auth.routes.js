@@ -25,4 +25,25 @@ router.get("/logout", (req, res) => {
   });
 });
 
+// home page
+router.get(["/", "/home"], (req, res) => {
+  res.render("home", {
+    isAdmin: req.session.isAdmin,
+    header: {
+      title: "HOME",
+    },
+    body: {
+      header: "<h1>Bienvenue 👋</h1>",
+    },
+  });
+});
+
+
+// chat page
+router.get("/chat", (req, res) => {
+  res.render("chat", {
+    pseudo: req.session.pseudo ?? "",
+  });
+});
+
 export default router;
