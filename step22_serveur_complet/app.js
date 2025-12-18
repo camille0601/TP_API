@@ -58,7 +58,7 @@ app.get(["/", "/home"], requireAdmin, (req, res) => {
       title: "HOME",
     },
     body: {
-      header: "<h1>Bienvenue 👋</h1>",
+      header: "<h1>Bienvenue </h1>",
       main: "<p>Connexion réussie.</p>",
     },
   });
@@ -80,30 +80,3 @@ initChat(server);
 server.listen(SERVER_PORT, "0.0.0.0", () => {
   console.log(`🚀 Serveur + WS sur http://0.0.0.0:${SERVER_PORT}`);
 });
-
-// Lancement
-/*
-app.listen(SERVER_PORT, "0.0.0.0", () => {
-  console.log(`🚀 Serveur démarré sur http://0.0.0.0:${SERVER_PORT}`);
-});
-*/
-
-// ------------------------
-// Cookies
-// ------------------------
-function parseCookies(request) {
-  const list = {};
-  const rc = request.headers.cookie;
-
-  if (!rc) return list;
-
-  rc.split(";").forEach((cookie) => {
-    const parts = cookie.split("=");
-    const value = ["true", "false"].includes(parts[1])
-      ? parts[1] === "true"
-      : parts[1];
-    list[parts[0].trim()] = value;
-  });
-
-  return list;
-}

@@ -2,25 +2,40 @@
 <html>
 <head>
   <title>Chat</title>
+  <link rel="stylesheet" href="/style.css">
   <link rel="stylesheet" href="/chat.css">
 </head>
-<body>
+<body class="page-chat">
+  <header>
+    <h1>Chat</h1>
+  </header>
+    <nav>
+        <ul>
+            <li><a href="/home">HOME</a></li>
+            <li><a href="/aboutMe">aPropos</a></li>
+            <li><a href="/login">déconnexion</a></li>
+        </ul>
+    </nav>
+  <main>
+    <div class="chat-container">
+      <div id="login">
+        <input id="pseudo" placeholder="Ton pseudo">
+        <button onclick="join()">Entrer</button>
+      </div>
 
-<h1>💬 Chat Socket.io</h1>
+      <div id="chat" style="display:none">
+        <div id="messages"></div>
+        <input id="msg" placeholder="Message">
+        <button onclick="send()">Envoyer</button>
+      </div>
+    </div>
+  </main>
+  <footer>
+    Made by Camille le <%= new Date().toLocaleDateString() %>
+  </footer>
 
-<div id="login">
-  <input id="pseudo" placeholder="Ton pseudo">
-  <button onclick="join()">Entrer</button>
-</div>
-
-<div id="chat" style="display:none">
-  <div id="messages"></div>
-  <input id="msg" placeholder="Message">
-  <button onclick="send()">Envoyer</button>
-</div>
-
-<!-- IMPORTANT -->
-<script src="/socket.io/socket.io.js"></script>
-<script src="/chat.js"></script>
+  <!-- IMPORTANT -->
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/chat.js"></script>
 </body>
 </html>

@@ -7,11 +7,16 @@
   </head>
 
   <body>
-    <h1>Avec des templates inclus</h1>
-
-    <%- include("layout/menu") %>
-    <%- include("layout/header", { title: "À propos de moi" }) %>
-
+    <header>
+      <h1>A PROPOS DE MOI</h1>
+    </header>
+    <nav>
+      <ul>
+        <li><a href="/home">HOME</a></li>
+        <li><a href="/chat">chat</a></li>
+        <li><a href="/login">déconnexion</a></li>
+      </ul>
+    </nav>
     <main>
       <p>Je m'appelle Camille</p>
     </main>
