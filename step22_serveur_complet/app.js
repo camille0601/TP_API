@@ -8,7 +8,6 @@ import { dirname } from "node:path";
 import express from "express";
 import session from "express-session";
 
-import authRoutes from "./routes/auth.routes.js";
 import apiRoutes from "./routes/api.routes.js";
 import requireAdmin from "./middlewares/requireAdmin.js";
 import apiRoutes from "./routes/api.routes.js";
