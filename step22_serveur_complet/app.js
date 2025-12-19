@@ -9,6 +9,7 @@ import express from "express";
 import session from "express-session";
 
 import authRoutes from "./routes/auth.routes.js";
+import apiRoutes from "./routes/api.routes.js";
 import requireAdmin from "./middlewares/requireAdmin.js";
 
 // ------------------------
@@ -27,7 +28,9 @@ const template_folder = path.join(__dirname, "tmpl");
 // ------------------------
 // Middleware
 // ------------------------
+app.use(express.json());
 app.use(express.urlencoded({ extended: true })); // pour récupérer les forms
+app.use(apiRoutes);
 
 // sessions
 app.use(
