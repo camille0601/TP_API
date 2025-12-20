@@ -12,22 +12,20 @@ import authRoutes from "./routes/auth.routes.js";
 import requireAdmin from "./middlewares/requireAdmin.js";
 import apiRoutes from "./routes/api.routes.js";
 
-// ------------------------
+
 // Constantes
-// ------------------------
+
 const SERVER_PORT = 8080;
 const app = express();
 
-// ------------------------
 // __dirname en ES module
-// ------------------------
+
 const __filename = url.fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 const template_folder = path.join(__dirname, "tmpl");
 
-// ------------------------
 // Middleware
-// ------------------------
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true })); // pour récupérer les forms
 app.use(apiRoutes);
@@ -41,16 +39,15 @@ app.use(
   })
 );
 
-// view = views
+// view 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 app.use(express.static("public"));
 
-// routes auth
+// routes 
 app.use(authRoutes);
 
-// routes existantes
-app.get("/aboutMe", requireAdmin, (req, res) => {
+app.get("/aboutMe", requireAdmin, test, plug1, (req, res) => {
   res.render("aboutMe");
 });
 
